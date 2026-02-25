@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head titulo=this.titulo}}
+<body>
+
+    {{> header titulo=this.titulo}}
+
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="display-5">Bienvenido a KanbanPro</h1>
+                <p class="lead">Tu herramienta de gestión de tareas estilo Kanban. Organiza, prioriza y realiza seguimiento de tus proyectos en un solo lugar.</p>
+                <p>Accede a tu tablero o configura tu cuenta para empezar:</p>
+                <p>
+                    <a href="/login" class="btn btn-primary me-2">Iniciar sesión</a>
+                    <a href="/register" class="btn btn-outline-secondary">Registrarse</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2>Información de la aplicación</h2>
+                <p>KanbanPro ayuda a equipos y personas a visualizar el trabajo, limitar el trabajo en progreso y maximizar el flujo. Esta página solo muestra información estática sobre la app — las tareas se gestionan en el tablero.</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Tableros</h5>
+                        <p class="card-text">Crea y personaliza tableros para cada proyecto o flujo de trabajo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Colaboración</h5>
+                        <p class="card-text">Invita a compañeros, asigna responsables y comenta las tareas.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Reportes</h5>
+                        <p class="card-text">Visualiza el progreso con métricas simples y exportables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    {{> footer}}
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

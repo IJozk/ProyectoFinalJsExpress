@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head titulo=this.titulo}}
+<body>
+
+    {{> header titulo=this.titulo}}
+
+    <div class="container">
+        <div class="row">
+            <h1>DASHBOARD</h1>
+
+            <form action="/nuevaTarea" method="post">
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título de la tarea</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción de la tarea</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado de la tarea</label>
+                    <select class="form-select" id="estado" name="estado" required>
+                        <option value="Por hacer">Por hacer</option>
+                        <option value="En progreso">En progreso</option>
+                        <option value="Hecho">Hecho</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Crear tarea</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h1>Tablero</h1>
+        <div class="row">
+            <div class="col">
+                <h2>Por hacer</h2>
+                {{#each tareasTodo}}
+                    <div class="col mb-4">
+                        {{> card}}
+                    </div>
+                {{/each}}
+            </div>
+            <div class="col">
+                <h2>En progreso</h2>
+                {{#each tareasInProgress}}
+                    <div class="col mb-4">
+                        {{> card}}
+                    </div>
+                {{/each}}
+            </div>
+            <div class="col">
+                <h2>Hecho</h2>
+                {{#each tareasDone}}
+                    <div class="col mb-4">
+                        {{> card}}
+                    </div>
+                {{/each}}
+        </div>
+    </div>
+    
+    {{> footer}}
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
