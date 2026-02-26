@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-{{> head titulo=this.titulo}}
-<body>
-
-    {{> header titulo=this.titulo}}
-
     <div class="container">
         <div class="row">
             <h1>DASHBOARD</h1>
 
-            <form action="/nuevaTarea" method="post">
+            {{!-- <form action="/nuevaTarea" method="post">
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Título de la tarea</label>
                     <input type="text" class="form-control" id="titulo" name="titulo" required>
@@ -27,7 +20,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Crear tarea</button>
-            </form>
+            </form> --}}
 
         </div>
     </div>
@@ -36,33 +29,105 @@
         <h1>Tablero</h1>
         <div class="row">
             <div class="col">
-                <h2>Por hacer</h2>
+                <div class="board-column">
+                    <div class="column-header"><h2 class="column-title">Por hacer</h2></div>
+                <div class="mb-3">
+                    <button class="btn btn-sm btn-success" data-toggle-target="#newTaskForm">+ Añadir tarea</button>
+                    <div id="newTaskForm" class="mt-2 collapse">
+                        <form action="/nuevaTarea" method="post" class="row g-2">
+                            <div class="col-12">
+                                <input type="text" class="form-control form-control-sm" name="titulo" placeholder="Título" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control form-control-sm" name="descripcion" placeholder="Descripción" rows="2"></textarea>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-select form-select-sm" name="estado" required>
+                                    <option value="Por hacer">Por hacer</option>
+                                    <option value="En progreso">En progreso</option>
+                                    <option value="Hecho">Hecho</option>
+                                </select>
+                            </div>
+                            <div class="col-6 d-flex">
+                                <button class="btn btn-primary btn-sm me-2" type="submit">Crear</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle-target="#newTaskForm" data-toggle-action="hide">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 {{#each tareasTodo}}
                     <div class="col mb-4">
                         {{> card}}
                     </div>
                 {{/each}}
+                </div>
             </div>
             <div class="col">
-                <h2>En progreso</h2>
+                <div class="board-column">
+                    <div class="column-header"><h2 class="column-title">En progreso</h2></div>
+                <div class="mb-3">
+                    <button class="btn btn-sm btn-success" data-toggle-target="#newTaskFormProgress">+ Añadir tarea</button>
+                    <div id="newTaskFormProgress" class="mt-2 collapse">
+                        <form action="/nuevaTarea" method="post" class="row g-2">
+                            <div class="col-12">
+                                <input type="text" class="form-control form-control-sm" name="titulo" placeholder="Título" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control form-control-sm" name="descripcion" placeholder="Descripción" rows="2"></textarea>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-select form-select-sm" name="estado" required>
+                                    <option value="Por hacer">Por hacer</option>
+                                    <option value="En progreso" selected>En progreso</option>
+                                    <option value="Hecho">Hecho</option>
+                                </select>
+                            </div>
+                            <div class="col-6 d-flex">
+                                <button class="btn btn-primary btn-sm me-2" type="submit">Crear</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle-target="#newTaskFormProgress" data-toggle-action="hide">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 {{#each tareasInProgress}}
                     <div class="col mb-4">
                         {{> card}}
                     </div>
                 {{/each}}
+                </div>
             </div>
             <div class="col">
-                <h2>Hecho</h2>
+                <div class="board-column">
+                    <div class="column-header"><h2 class="column-title">Hecho</h2></div>
+                <div class="mb-3">
+                    <button class="btn btn-sm btn-success" data-toggle-target="#newTaskFormDone">+ Añadir tarea</button>
+                    <div id="newTaskFormDone" class="mt-2 collapse">
+                        <form action="/nuevaTarea" method="post" class="row g-2">
+                            <div class="col-12">
+                                <input type="text" class="form-control form-control-sm" name="titulo" placeholder="Título" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control form-control-sm" name="descripcion" placeholder="Descripción" rows="2"></textarea>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-select form-select-sm" name="estado" required>
+                                    <option value="Por hacer">Por hacer</option>
+                                    <option value="En progreso">En progreso</option>
+                                    <option value="Hecho" selected>Hecho</option>
+                                </select>
+                            </div>
+                            <div class="col-6 d-flex">
+                                <button class="btn btn-primary btn-sm me-2" type="submit">Crear</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle-target="#newTaskFormDone" data-toggle-action="hide">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 {{#each tareasDone}}
                     <div class="col mb-4">
                         {{> card}}
                     </div>
                 {{/each}}
+                </div>
         </div>
     </div>
-    
-    {{> footer}}
-
-    <script src="/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

@@ -1,0 +1,94 @@
+/* Custom styles for KanbanPro */
+body {
+  background: #f6f8fa;
+  color: #222;
+}
+.navbar-brand {
+  font-weight: 700;
+  color: #0d6efd !important;
+}
+header h1 {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  color: #333;
+}
+.card {
+  box-shadow: 0 6px 18px rgba(20,30,50,0.06);
+  border: 0;
+  border-radius: 10px;
+}
+.card .card-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.card .card-subtitle {
+  font-size: 0.85rem;
+}
+.badge-status {
+  display: inline-block;
+  padding: 0.35em 0.6em;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+}
+.container.mt-5 h1 {
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+}
+.collapse {
+  display: none;
+}
+.collapse.show {
+  display: block;
+}
+/* Column layout tweaks */
+.row > .col {
+  min-height: 200px;
+}
+/* Make the add buttons more visible */
+.btn-success {
+  background: linear-gradient(90deg,#198754,#3cc37d);
+  border: none;
+}
+/* Form small adjustments */
+.form-control-sm, .form-select-sm {
+  font-size: 0.85rem;
+}
+
+/* Board column delimiters */
+.board-column {
+  background: #ffffff;
+  border: 1px solid rgba(20,30,50,0.08);
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.board-column .column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.board-column .column-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #222;
+}
+.board-columns-wrapper {
+  gap: 1rem;
+  display: flex;
+}
+.column-separator {
+  width: 1px;
+  background: rgba(20,30,50,0.04);
+  margin: 0 8px;
+}
+.card.small-card {
+  padding: 10px;
+}

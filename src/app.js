@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require('path');
-const hbs = require("hbs");
+const { engine } = require('express-handlebars');
 
 const helpershbs = require("../helpers/handlebars")
 
@@ -9,6 +9,14 @@ const helpersTasks = require("../helpers/crudTasks")
 const app = express();
 
 const PORT = 3030;
+
+app.engine('hbs', engine({
+    extname: 'hbs',
+    defaultLayout: 'main', // Archivo layout por defecto
+    layoutsDir: path.join(__dirname, '../views/layouts'),
+    partialsDir: path.join(__dirname, '../views/partials'),
+    helpers: helpershbs
+}));
 
 app.set('view engine', 'hbs');
 
@@ -21,18 +29,6 @@ app.use(express.static(path.join(__dirname, '../node_modules/bootstrap/dist')))
 app.use(express.urlencoded({ extended: true }));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
-
-hbs.registerHelper('ifEquals', function (a, b, options) {
-    return a === b ? options.fn(this) : options.inverse(this);
-});
-
-hbs.registerPartials(path.join(__dirname, '../views/partials'), (err) => {
-    if (err) {
-        console.error('Error al registrar parciales:', err);
-    } else {
-        console.log('Partiales registrados correctamente.');
-    }
-});
 
 app.get('/', (req, res) => {
     res.render("home")
@@ -83,6 +79,12 @@ app.post('/moverTarea', (req, res) => {
     console.log(id)
     console.log(estado)
     helpersTasks.cambioEstado(id, estado);
+    res.redirect('/dashboard');
+})
+
+app.get('/eliminarTarea/:id', (req, res) => {
+    const id = req.params.id;
+    helpersTasks.eliminarMensaje(id);
     res.redirect('/dashboard');
 })
 

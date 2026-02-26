@@ -1,15 +1,22 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
-        <h5 class="card-title">{{titulo}}</h5>
+        <div class="row">
+            <div class="col-10">
+                <h5 class="card-title">{{titulo}}</h5>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-danger btn-sm " href="/eliminarTarea/{{id}}" role="button"> X </a>
+            </div>
+        </div>
         <h6 class="card-subtitle mb-2 text-muted">{{estado}}</h6>
-        <p class="card-text">{{descripcion}}</p>
+        <p class="card-text">{{{descripcion}}}</p>
         {{!-- input tipo select con los posibles estados --}}
         <form action="/moverTarea" method="post">
             <input type="hidden" name="id" value="{{id}}">
-            <select class="form-select mb-2" id="estado" name="estado" value="{{estado}}" required>
-                <option value="Por hacer">Por hacer</option>
-                <option value="En progreso">En progreso</option>
-                <option value="Hecho">Hecho</option>
+            <select class="form-select mb-2" id="estado" name="estado" required>
+                <option value="Por hacer" {{#ifEquals estado "Por hacer"}}selected{{/ifEquals}}>Por hacer</option>
+                <option value="En progreso" {{#ifEquals estado "En progreso"}}selected{{/ifEquals}}>En progreso</option>
+                <option value="Hecho" {{#ifEquals estado "Hecho"}}selected{{/ifEquals}}>Hecho</option>
             </select>
             <button type="submit" class="btn btn-primary">Mover tarea</button>
         </form>

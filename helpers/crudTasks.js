@@ -107,8 +107,10 @@ module.exports = {
             const data = JSON.parse(raw);
             const tareas = data
 
-            if (id > -1 && id < tareas.length) {
-                tareas.splice(id, 1);
+            const indexTarea = tareas.findIndex(t => t.id == id);
+
+            if (indexTarea > -1 && indexTarea < tareas.length) {
+                tareas.splice(indexTarea, 1);
             }
 
             fs.writeFileSync(filePath, JSON.stringify(tareas, null, 2), 'utf8')
