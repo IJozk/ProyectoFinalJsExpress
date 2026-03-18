@@ -80,9 +80,9 @@ const delete_test = async( cardId ) =>{
 const test = async() =>{
     try {
         await create_test(1)
-        await read_test(5)
+        await read_test(1)
         await update_test(1)
-        await delete_test(4)
+        await delete_test(3)
         console.log("Se realizaron las pruebas con exito")
     } catch (error) {
         console.log(error)
