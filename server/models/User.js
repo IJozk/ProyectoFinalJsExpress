@@ -6,8 +6,8 @@ const User = sequelize.define(
     {
         // Model attributes are defined here
         id:{
-            type: DataTypes.STRING,
-            allowNull: false,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         email: {

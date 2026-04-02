@@ -126,28 +126,73 @@ app.post('/login', async(req, res) => {
 
 app.get('/dashboard', async(req, res) => {
 
-    const token = req.cookies.token;
+    try {
 
-    const url = "http://localhost:3031/api/v1/user/getUserData"
+        const token = req.cookies.token;
+        if(!req.cookies.token){
+            res.redirect("/")
+        }
 
-    const respuesta = await fetch(url, {
-            method: 'POST', // Método de la petición
-            headers: {
-                'Content-Type': 'application/json' ,// Indicamos que enviamos JSON
-                'Authorization': `Bearer ${token}`
-            },
-            // body: JSON.stringify(datos) // El objeto convertido a string
-        });
+        const url = "http://localhost:3031/api/v1/user/getUserData"
+        const respuesta = await fetch(url, {
+                method: 'POST', // Método de la petición
+                headers: {
+                    'Content-Type': 'application/json' ,// Indicamos que enviamos JSON
+                    'Authorization': `Bearer ${token}`
+                },
+                // body: JSON.stringify(datos) // El objeto convertido a string
+            });
 
-    console.log(respuesta)
+        if(respuesta.status === 500){
+            res.redirect("/login")
+        }
 
-    // const tareasTodo = helpersTasks.leerTareas("Por hacer");
-    // const tareasInProgress = helpersTasks.leerTareas("En progreso");
-    // const tareasDone = helpersTasks.leerTareas("Hecho");
+        const data  = await  respuesta.json();
+        console.log(data.user)
+        console.log(data.tableros)
 
-    // res.render("dashboard", {tareasTodo: tareasTodo, tareasInProgress: tareasInProgress, tareasDone: tareasDone});
+        // const tareasTodo = helpersTasks.leerTareas("Por hacer");
+        // const tareasInProgress = helpersTasks.leerTareas("En progreso");
+        // const tareasDone = helpersTasks.leerTareas("Hecho");
+        res.render("dashboard", {user: data.user, tableros: data.tableros });
+    } catch (error) {
+        res.send({error: error})
+    }
+})
 
-    res.send(respuesta)
+app.post('/nuevoTablero', async(req, res) => {
+    console.log("Nuevo tablero")
+    try {
+        const token = req.cookies.token;
+
+        if(!req.cookies.token){
+            res.redirect("/")
+        }
+
+        const datos = req.body;
+
+        const url = "http://localhost:3031/api/v1/board/createBoard"
+
+        const respuesta = await fetch(url, {
+                method: 'POST', // Método de la petición
+                headers: {
+                    'Content-Type': 'application/json' ,// Indicamos que enviamos JSON
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(datos) // El objeto convertido a string
+            });
+
+        if(respuesta.status === 500){
+            res.redirect("/login")
+        }
+
+        console.log(respuesta)
+        // console.log("Nueva tarea creada con exito", JSON.stringify(nuevaTarea))
+        res.redirect('/dashboard');
+    } catch (error) {
+        res.send({error: error})
+    }
+    
 })
 
 app.post('/nuevaTarea', (req, res) => {

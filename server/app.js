@@ -6,7 +6,7 @@ const apiRouter = require('./routes/api');
 const { User, Board, Card, List } = require("./models/Relations")
 const cors = require("cors")
 
-const PORT = process.env.PORT || 30301;
+const PORT = process.env.PORT || 3031;
 
 app.use(express.json());
 app.use(cors())
