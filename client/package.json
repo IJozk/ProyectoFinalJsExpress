@@ -21,6 +21,7 @@
   "homepage": "https://github.com/IJozk/ProyectoFinalJsExpress#readme",
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "cookie-parser": "^1.4.7",
     "express": "^5.2.1",
     "express-handlebars": "^8.0.2",
     "pg": "^8.20.0",
@@ -28,7 +29,7 @@
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14",
-    "dotenv": "^17.3.1"
+    "dotenv": "^17.3.1",
+    "nodemon": "^3.1.14"
   }
 }
