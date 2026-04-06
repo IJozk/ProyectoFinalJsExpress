@@ -5,11 +5,6 @@ const authMiddle =require("../middleware/auth");
 
 
 // Obtener datos de usuario, con tableros
-router.post("/getUserData", authMiddle, async(req, res) => {
-    console.log("Data de usuario")
-    const data = await getUserData(req, res)
-    console.log(data)
-    return res.status(200).json({ user:data.user, tableros:data.tableros });
-})
+router.post("/getUserData", authMiddle, async(req, res) => getUserData(req, res))
 
 module.exports = router;

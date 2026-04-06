@@ -3,13 +3,8 @@ const router = express.Router();
 const { login, register } = require("../controllers/authController")
 
 // Register
-router.post("/register", async(req, res) => {
-    console.log("Registrando desde el BACK")
-    await register(req, res)
-})
+router.post("/register", async(req, res) => register(req, res))
 // Login
-router.post("/login", async(req, res) => {
-    await login(req, res)
-})
+router.post("/login", async(req, res) => login(req, res))
 
 module.exports = router;

@@ -1,94 +1,263 @@
-/* Custom styles for KanbanPro */
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
-  background: #f6f8fa;
-  color: #222;
-}
-.navbar-brand {
-  font-weight: 700;
-  color: #0d6efd !important;
-}
-header h1 {
-  font-size: 1.25rem;
-  margin-top: 0.5rem;
-  margin-left: 1rem;
-  color: #333;
-}
-.card {
-  box-shadow: 0 6px 18px rgba(20,30,50,0.06);
-  border: 0;
-  border-radius: 10px;
-}
-.card .card-title {
-  font-size: 1rem;
-  font-weight: 600;
-}
-.card .card-subtitle {
-  font-size: 0.85rem;
-}
-.badge-status {
-  display: inline-block;
-  padding: 0.35em 0.6em;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-}
-.container.mt-5 h1 {
-  font-size: 1.5rem;
-  letter-spacing: 0.5px;
-}
-.btn-sm {
-  padding: 0.25rem 0.5rem;
-}
-.collapse {
-  display: none;
-}
-.collapse.show {
-  display: block;
-}
-/* Column layout tweaks */
-.row > .col {
-  min-height: 200px;
-}
-/* Make the add buttons more visible */
-.btn-success {
-  background: linear-gradient(90deg,#198754,#3cc37d);
-  border: none;
-}
-/* Form small adjustments */
-.form-control-sm, .form-select-sm {
-  font-size: 0.85rem;
+  background: #f4f5f7;
+  color: #172b4d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
 }
 
-/* Board column delimiters */
-.board-column {
-  background: #ffffff;
-  border: 1px solid rgba(20,30,50,0.08);
-  border-radius: 10px;
-  padding: 12px;
-  min-height: 220px;
+/* ── Layout ── */
+.collapse       { display: none; }
+.collapse.show  { display: block; }
+
+/* ── Board header ── */
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e4e8;
+  margin-bottom: 16px;
+}
+.board-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Column ── */
+.kanban-col {
+  background: #ebecf0;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 260px;
+  max-width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kanban-col__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #5e6c84;
+  margin-bottom: 4px;
+}
+
+.kanban-col__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kanban-col__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 40px;
+}
+
+/* ── Card ── */
+.kanban-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 2px rgba(9,30,66,0.1);
+  cursor: grab;
+}
+
+.kanban-card:hover {
+  box-shadow: 0 2px 6px rgba(9,30,66,0.15);
+}
+
+.kanban-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kanban-card__title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.kanban-card__actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.kanban-card:hover .kanban-card__actions {
+  opacity: 1;
+}
+
+.kanban-card__body {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kanban-card__desc {
+  font-size: 0.8rem;
+  color: #5e6c84;
+  margin: 0;
+}
+
+.kanban-card__meta {
+  font-size: 0.75rem;
+  color: #97a0af;
+}
+
+/* ── Icon buttons ── */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: #5e6c84;
+  text-decoration: none;
+}
+
+.btn-icon:hover {
+  background: #e1e4e8;
+  color: #172b4d;
+}
+
+.btn-icon--delete:hover {
+  background: #ffebe6;
+  color: #bf2600;
+}
+
+/* ── Add buttons ── */
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #5e6c84;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-add:hover {
+  background: #dfe1e6;
+  color: #172b4d;
+}
+
+/* ── Modals ── */
+.mk-modal {
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(9,30,66,0.18);
+  overflow: hidden;
+}
+
+.mk-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e1e4e8;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #172b4d;
+}
+
+.mk-modal__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #97a0af;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.mk-modal__close:hover {
+  background: #e1e4e8;
+  color: #172b4d;
+}
+
+.mk-modal__body {
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.board-column .column-header {
+
+.mk-modal__footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid #e1e4e8;
 }
-.board-column .column-title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #222;
+
+/* ── Inputs ── */
+.mk-input {
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 0.875rem;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  background: #fff;
+  color: #172b4d;
+  outline: none;
+  resize: none;
+  font-family: inherit;
 }
-.board-columns-wrapper {
-  gap: 1rem;
-  display: flex;
+
+.mk-input:focus {
+  border-color: #4c9aff;
+  box-shadow: 0 0 0 2px rgba(76,154,255,0.15);
 }
-.column-separator {
-  width: 1px;
-  background: rgba(20,30,50,0.04);
-  margin: 0 8px;
+
+/* ── Buttons ── */
+.mk-btn {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
 }
-.card.small-card {
-  padding: 10px;
+
+.mk-btn--primary {
+  background: #0052cc;
+  color: #fff;
+}
+
+.mk-btn--primary:hover {
+  background: #0047b3;
+}
+
+.mk-btn--ghost {
+  background: transparent;
+  color: #5e6c84;
+}
+
+.mk-btn--ghost:hover {
+  background: #e1e4e8;
+  color: #172b4d;
 }

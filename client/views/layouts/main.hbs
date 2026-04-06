@@ -9,6 +9,60 @@
     
     {{> footer}}
 
+    <!-- Modal nueva card -->
+    <div class="modal fade" id="newCardModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content mk-modal">
+                <div class="mk-modal__header">
+                    <span>Nueva tarea</span>
+                    <button type="button" class="mk-modal__close" data-bs-dismiss="modal">&#x2715;</button>
+                </div>
+                <form action="/createCard" method="post">
+                    <div class="mk-modal__body">
+                        <input type="hidden" name="listId" id="newCardListId">
+                        <input type="hidden" name="boardId" id="newCardBoardId">
+                        <input type="text" class="mk-input" name="title" placeholder="Título" required>
+                        <textarea class="mk-input" name="description" placeholder="Descripción" rows="2"></textarea>
+                        <input type="date" class="mk-input" name="start_date">
+                        <input type="date" class="mk-input" name="deadline">
+                    </div>
+                    <div class="mk-modal__footer">
+                        <button type="button" class="mk-btn mk-btn--ghost" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="mk-btn mk-btn--primary">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar card -->
+    <div class="modal fade" id="editCardModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content mk-modal">
+                <div class="mk-modal__header">
+                    <span>Editar tarea</span>
+                    <button type="button" class="mk-modal__close" data-bs-dismiss="modal">&#x2715;</button>
+                </div>
+                <form action="/updateCard" method="post">
+                    <div class="mk-modal__body">
+                        <input type="hidden" name="id" id="editCardId">
+                        <input type="text" class="mk-input" name="title" id="editCardTitle" placeholder="Título" required>
+                        <textarea class="mk-input" name="description" id="editCardDescription" placeholder="Descripción" rows="2"></textarea>
+                        <label for="start_date">Inicia en</label>
+                        <input type="date" class="mk-input" name="start_date" id="editCardStartDate"  required>
+                        <label for="deadline">Finaliza en</label>
+                        <input type="date" class="mk-input" name="deadline" id="editCardDeadline" required>
+                        <input type="hidden" name="responsible_id" id="editCardResponsible">
+                    </div>
+                    <div class="mk-modal__footer">
+                        <button type="button" class="mk-btn mk-btn--ghost" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="mk-btn mk-btn--primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/dashboard.js"></script>
 </body>

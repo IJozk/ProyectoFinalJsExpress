@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const register = async(req, res) =>{
 
     try {
-        console.log(req.body)
+
         if( !req.body || !req.body.email || !req.body.password || !req.body.userName ){
             return res.status(400).json({ error: "Se requieren datos para el registro"});
         }
@@ -29,16 +29,12 @@ const register = async(req, res) =>{
 
         const id = crypto.randomUUID();
 
-        console.log(id)
-
         const newUser = await User.create({
             id,
             userName,
             email,
             password: hashedPassword 
         })
-
-        console.log(newUser)
 
         res.status(201).json({ status: "success", message: "Se resgistro al usuario correctamente" })        
 
@@ -57,8 +53,6 @@ const login = async(req, res) =>{
         const user = await User.findAll({ where: {email: email} })
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        console.log(user[0].dataValues.password)
-
         const passwordToCompare = user[0].dataValues.password
 
         const isValid = bcrypt.compare(password, passwordToCompare);
@@ -66,11 +60,7 @@ const login = async(req, res) =>{
 
         const userId = user[0].dataValues.id
 
-        console.log(userId)
-
         const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        console.log(token)
 
         return res.status(200).json({ status: "success", message: "Se logeo al usuario correctamente", token: token })
     } catch (error) {

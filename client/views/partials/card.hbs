@@ -1,24 +1,33 @@
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-10">
-                <h5 class="card-title">{{titulo}}</h5>
-            </div>
-            <div class="col-2">
-                <a class="btn btn-danger btn-sm " href="/eliminarTarea/{{id}}" role="button"> X </a>
-            </div>
+<div class="kanban-card" data-card-id="{{id}}">
+    <div class="kanban-card__header">
+        <span class="kanban-card__title">{{title}}</span>
+        <div class="kanban-card__actions">
+            <a class="btn-icon btn-icon--edit"
+               data-bs-toggle="modal"
+               data-bs-target="#editCardModal"
+               data-id="{{id}}"
+               data-title="{{title}}"
+               data-description="{{description}}"
+               data-start_date="{{start_date}}"
+               data-deadline="{{deadline}}"
+               data-responsible_id="{{responsible_id}}"
+               role="button"
+               title="Editar">Edit</a>
+            <form action="/deleteCard/{{id}}" method="post" style="display:inline">
+                <button type="submit" class="btn-icon btn-icon--delete" title="Eliminar">Del</button>
+            </form>
         </div>
-        <h6 class="card-subtitle mb-2 text-muted">{{estado}}</h6>
-        <p class="card-text">{{{descripcion}}}</p>
-        {{!-- input tipo select con los posibles estados --}}
-        <form action="/moverTarea" method="post">
-            <input type="hidden" name="id" value="{{id}}">
-            <select class="form-select mb-2" id="estado" name="estado" required>
-                <option value="Por hacer" {{#ifEquals estado "Por hacer"}}selected{{/ifEquals}}>Por hacer</option>
-                <option value="En progreso" {{#ifEquals estado "En progreso"}}selected{{/ifEquals}}>En progreso</option>
-                <option value="Hecho" {{#ifEquals estado "Hecho"}}selected{{/ifEquals}}>Hecho</option>
-            </select>
-            <button type="submit" class="btn btn-primary">Mover tarea</button>
-        </form>
+    </div>
+
+    <div class="kanban-card__body">
+        {{#if description}}
+            <p class="kanban-card__desc">{{{description}}}</p>
+        {{/if}}
+        {{#if start_date}}
+            <span class="kanban-card__meta">{{ dateFormat start_date }}</span>
+        {{/if}}
+        {{#if deadline}}
+            <span class="kanban-card__meta">{{ dateFormat deadline }}</span>
+        {{/if}}
     </div>
 </div>
