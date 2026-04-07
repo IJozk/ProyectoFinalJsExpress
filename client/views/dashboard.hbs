@@ -2,92 +2,112 @@
 
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 style="font-size:1.25rem; font-weight:700; margin:0">{{ user.userName }}</h1>
-        <button class="btn-add" style="width:auto" data-toggle-target="#newBoardForm">+ Tablero</button>
+        <button class="btn-add btn-add--inline" data-toggle-target="#newBoardForm">+ Tablero</button>
     </div>
 
     <div id="newBoardForm" class="collapse mb-4" style="max-width:320px">
         <form action="/createBoard" method="post" class="d-flex flex-column gap-2">
-            <input type="text" class="form-control form-control-sm" name="title" placeholder="Nombre del tablero" required>
-            <textarea class="form-control form-control-sm" name="description" placeholder="Descripción" rows="2"></textarea>
+            <input type="text" class="mk-input" name="title" placeholder="Nombre del tablero" required>
+            <textarea class="mk-input" name="description" placeholder="Descripción" rows="2"></textarea>
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary btn-sm">Crear</button>
-                <button type="button" class="btn btn-secondary btn-sm" data-toggle-target="#newBoardForm" data-toggle-action="hide">Cancelar</button>
+                <button type="submit" class="mk-btn mk-btn--primary">Crear</button>
+                <button type="button" class="mk-btn mk-btn--ghost" data-toggle-target="#newBoardForm" data-toggle-action="hide">Cancelar</button>
             </div>
         </form>
     </div>
 
-    {{#each tableros}}
-    <div class="mb-5">
+    {{#if tableros}}
 
-        <div class="board-header">
-            <button class="btn-add" style="width:auto; font-size:1rem; font-weight:700; color:#172b4d" data-toggle-target="#boardToggle{{id}}">
-                {{title}}
-            </button>
-            <div class="d-flex gap-2">
-                <button class="btn-icon"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editBoardModal"
-                        data-id="{{id}}"
-                        data-title="{{title}}"
-                        data-description="{{description}}"
-                        title="Editar tablero">Edit</button>
-                <button class="btn-add" style="width:auto"
-                        data-toggle-target="#newListForm{{id}}">+ Lista</button>
-                <form action="/deleteBoard/{{id}}" method="post" style="display:inline">
-                    <button type="submit" class="btn-icon btn-icon--delete" title="Eliminar tablero">X</button>
+        {{#each tableros}}
+        <div class="mb-5">
+
+            <div class="board-header">
+                <button class="btn-board-toggle" data-toggle-target="#boardToggle{{id}}">
+                    {{title}}
+                </button>
+                <div class="d-flex gap-2">
+                    <button class="btn-icon"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editBoardModal"
+                            data-id="{{id}}"
+                            data-title="{{title}}"
+                            data-description="{{description}}"
+                            title="Editar tablero"><i class="bi bi-pencil"></i></button>
+                    <button class="btn-add btn-add--inline"
+                            data-toggle-target="#newListForm{{id}}">+ Lista</button>
+                    <form action="/deleteBoard/{{id}}" method="post" style="display:inline">
+                        <button type="submit" class="btn-icon btn-icon--delete" title="Eliminar tablero"><i class="bi bi-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="newListForm{{id}}" class="collapse mb-3" style="max-width:320px">
+                <form action="/createList" method="post" class="d-flex flex-column gap-2">
+                    <input type="text" class="mk-input" name="title" placeholder="Nombre de la lista" required>
+                    <input type="hidden" name="boardId" value="{{id}}">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="mk-btn mk-btn--primary">Crear</button>
+                        <button type="button" class="mk-btn mk-btn--ghost" data-toggle-target="#newListForm{{id}}" data-toggle-action="hide">Cancelar</button>
+                    </div>
                 </form>
             </div>
-        </div>
 
-        <div id="newListForm{{id}}" class="collapse mb-3" style="max-width:320px">
-            <form action="/createList" method="post" class="d-flex flex-column gap-2">
-                <input type="text" class="form-control form-control-sm" name="title" placeholder="Nombre de la lista" required>
-                <input type="hidden" name="boardId" value="{{id}}">
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary btn-sm">Crear</button>
-                    <button type="button" class="btn btn-secondary btn-sm" data-toggle-target="#newListForm{{id}}" data-toggle-action="hide">Cancelar</button>
-                </div>
-            </form>
-        </div>
+            <div id="boardToggle{{id}}" class="collapse show">
+                <div class="d-flex gap-3 overflow-auto pb-2">
+                    {{#if Lists}}
+                        {{#each Lists}}
+                            <div class="kanban-col" data-list-id="{{id}}">
 
-        <div id="boardToggle{{id}}" class="collapse show">
-            <div class="d-flex gap-3 overflow-auto pb-2">
-                {{#each Lists}}
-                <div class="kanban-col" data-list-id="{{id}}">
+                                <div class="kanban-col__header">
+                                    <span class="kanban-col__title">{{title}}</span>
+                                    <div class="d-flex gap-1">
+                                        <button class="btn-icon"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editListModal"
+                                                data-id="{{id}}"
+                                                data-title="{{title}}"
+                                                data-description="{{description}}"
+                                                title="Editar lista"><i class="bi bi-pencil"></i></button>
+                                        <form action="/deleteList/{{id}}" method="post" style="display:inline">
+                                            <button type="submit" class="btn-icon btn-icon--delete" title="Eliminar"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
 
-                    <div class="kanban-col__header">
-                        <span class="kanban-col__title">{{title}}</span>
-                        <div class="d-flex gap-1">
-                            <button class="btn-icon"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#editListModal"
-                                    data-id="{{id}}"
-                                    data-title="{{title}}"
-                                    data-description="{{description}}"
-                                    title="Editar lista">Edit</button>
-                            <form action="/deleteList/{{id}}" method="post" style="display:inline">
-                                <button type="submit" class="btn-icon btn-icon--delete" title="Eliminar">X</button>
-                            </form>
-                        </div>
-                    </div>
+                                <div class="kanban-col__cards">
+                                    {{#each Cards}}
+                                        {{> card lists=../../Lists}}
+                                    {{/each}}
+                                </div>
 
-                    <div class="kanban-col__cards">
-                        {{#each Cards}}
-                            {{> card lists=../../Lists}}
+                                <button class="btn-add"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#newCardModal"
+                                        data-list-id="{{id}}"
+                                        data-board-id="{{../id}}">+ Añadir tarea</button>
+                            </div>
                         {{/each}}
-                    </div>
-
-                    <button class="btn-add"
-                            data-bs-toggle="modal"
-                            data-bs-target="#newCardModal"
-                            data-list-id="{{id}}"
-                            data-board-id="{{../id}}">+ Añadir tarea</button>
+                    {{else}}
+                        <div class="empty-state">
+                            <div class="empty-state__icon">📋</div>
+                            <p class="empty-state__title">Este tablero no tiene listas todavía</p>
+                            <p class="empty-state__subtitle">Creá una lista para empezar a organizar tus tareas</p>
+                            <button class="btn-add btn-add--inline" data-toggle-target="#newListForm{{id}}">+ Nueva lista</button>
+                        </div>
+                    {{/if}}
                 </div>
-                {{/each}}
             </div>
         </div>
+        {{/each}}
+    {{else}}
 
-    </div>
-    {{/each}}
+        <div class="empty-state">
+            <div class="empty-state__icon">🗂️</div>
+            <p class="empty-state__title">Todavía no tenés tableros</p>
+            <p class="empty-state__subtitle">Creá tu primer tablero para empezar a organizar tu trabajo</p>
+            <button class="btn-add btn-add--inline" data-toggle-target="#newBoardForm">+ Nuevo tablero</button>
+        </div>
+
+    {{/if}}
 
 </div>
