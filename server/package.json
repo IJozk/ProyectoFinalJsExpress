@@ -5,6 +5,7 @@
   "main": "seed.js",
   "scripts": {
     "dev": "nodemon run app.js",
+    "build": "npm install && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
