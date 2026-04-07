@@ -1,4 +1,3 @@
-require("dotenv").config();
 const URL_BASE_API = process.env.URL_BASE_API || "";
 
 module.exports = {

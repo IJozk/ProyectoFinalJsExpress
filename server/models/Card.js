@@ -25,6 +25,18 @@ const Card = sequelize.define(
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             allowNull: true,
+        },
+        order: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        }
+    },
+    {
+    hooks: {
+        beforeCreate: async (card) => {
+            const count = await Card.count({ where: { ListId: card.ListId } });
+            card.order = count + 1;
+            }  
         }
     }
 );

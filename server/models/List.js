@@ -13,6 +13,18 @@ const List = sequelize.define(
             type: DataTypes.TEXT,
             allowNull: true,
         },
+        order: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        }
+    },
+    {
+    hooks: {
+        beforeCreate: async (list) => {
+            const count = await List.count({ where: { BoardId: list.BoardId } });
+            list.order = count + 1;
+            }  
+        }
     }
 );
 

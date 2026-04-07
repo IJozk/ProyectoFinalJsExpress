@@ -41,13 +41,13 @@ const updateList = async(req, res) =>{
     try {
         const title = req.body.title || "";
         const description = req.body.description || "";
-        const id = req.body.id;
+        const id = req.params.id;
         const affectedRows = await List.update(
             {title, description}, 
             {where: {id: id}}
         )
         if(affectedRows > 0){
-            res.status(201).location(`/api/v1/cards/${newCard.id}`).json({ status: 'success'});
+            res.status(201).location(`/api/v1/lists/${id}`).json({ status: 'success'});
         }
         else{
             res.status(204).json({ status: 'failed'});

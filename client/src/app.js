@@ -49,8 +49,9 @@ app.use(cookieParser());
 app.get('/', (req, res) => res.render("home"))
 
 // --> AUTH
-app.get('/login', (req, res) => res.render('login'))
-app.get('/register', (req, res) => res.render('register'))
+app.get('/login', (req, res) => res.render('login', { messageError: req.query.messageError }))
+app.get('/register', (req, res) => res.render('register', { messageError: req.query.messageError }))
+app.post('/logout', (req, res) => res.clearCookie('token').redirect('/'));
 app.post('/register', async(req, res) => helpersAuth.register(req,res))
 app.post('/login', async(req, res) => helpersAuth.login(req,res))
 
@@ -59,9 +60,13 @@ app.get('/dashboard', async(req, res) => helpersDashboard.getDashboardData(req, 
 
 // --> BOARDS
 app.post('/createBoard', async(req, res) => helpersBoard.createBoard(req,res))
+app.post('/deleteBoard/:id', async(req, res) => helpersBoard.deleteBoard(req, res))
+app.post('/updateBoard/:id', async(req, res) => helpersBoard.updateBoard(req, res))
 
 // --> LISTS
 app.post('/createList', async(req, res) => helpersList.createList(req, res))
+app.post('/deleteList/:id', async(req, res) => helpersList.deleteList(req, res))
+app.post('/updateList/:id', async(req, res) => helpersList.updateList(req, res))
 
 // --> CARDS
 app.post('/createCard', async(req, res) =>  helpersCards.createCard(req, res));

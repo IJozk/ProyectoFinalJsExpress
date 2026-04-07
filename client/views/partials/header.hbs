@@ -18,12 +18,29 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
+                    {{#if user}}
+                    <li class="nav-item dropdown">
+                        <button class="btn-user-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{user.userName}}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end mk-dropdown">
+                            <li><a class="mk-dropdown__item" href="/profile">Ver perfil</a></li>
+                            <li><hr class="mk-dropdown__divider"></li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    <button type="submit" class="mk-dropdown__item mk-dropdown__item--danger">Cerrar sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    {{else}}
                     <li class="nav-item">
                         <a class="btn btn-outline-primary me-2" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="/register">Register</a>
                     </li>
+                    {{/if}}
                 </ul>
             </div>
         </div>

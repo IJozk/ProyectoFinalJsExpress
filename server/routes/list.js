@@ -9,6 +9,6 @@ router.post("/createList", authMiddle, async(req, res) => createList(req, res))
 // Update List
 router.patch("/updateList/:id", authMiddle, async(req, res) => updateList(req, res))
 // Delete List
-router.delete("/delteList/:id", authMiddle, async(req, res) => deleteList(req, res))
+router.delete("/deleteList/:id", authMiddle, async(req, res) => deleteList(req, res))
 
 module.exports = router;

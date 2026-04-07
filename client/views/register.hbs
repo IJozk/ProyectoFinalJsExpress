@@ -5,25 +5,38 @@
 
     <div class="container">
         <div class="row">
-            <form action="" method="post">
+
+            <div class="col-md-2 col-3"></div>
+            <div class="col-md-8 col-6">
+                <h1>REGISTRO</h1>
+                
+                <form action="" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Nombre de usuario</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <input type="text" class="form-control" id="username" name="username" value="{{formData.username}}" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" value="{{formData.email}}" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <div class="mb-3">
-                    <label for="confirm-password" class="form-label">Confirmar contraseña</label>
-                    <input type="confirm-password" class="form-control" id="confirm-password" name="confirm-password" required>
+                    <label for="confirm_password" class="form-label">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                 </div>
+                {{#if messageError }}
+                    <div class="container bg-danger mb-3 border rounded">
+                        <div class="row text-light">
+                            <div class="col">{{messageError}}</div>
+                        </div>
+                    </div>
+                {{/if}}
                 <button type="submit" class="btn btn-primary">Registrarse</button>
             </form>
+            </div>
         </div>
     </div>
 

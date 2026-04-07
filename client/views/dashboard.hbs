@@ -23,8 +23,20 @@
             <button class="btn-add" style="width:auto; font-size:1rem; font-weight:700; color:#172b4d" data-toggle-target="#boardToggle{{id}}">
                 {{title}}
             </button>
-            <button class="btn-add" style="width:auto"
-                    data-toggle-target="#newListForm{{id}}">+ Lista</button>
+            <div class="d-flex gap-2">
+                <button class="btn-icon"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editBoardModal"
+                        data-id="{{id}}"
+                        data-title="{{title}}"
+                        data-description="{{description}}"
+                        title="Editar tablero">Edit</button>
+                <button class="btn-add" style="width:auto"
+                        data-toggle-target="#newListForm{{id}}">+ Lista</button>
+                <form action="/deleteBoard/{{id}}" method="post" style="display:inline">
+                    <button type="submit" class="btn-icon btn-icon--delete" title="Eliminar tablero">X</button>
+                </form>
+            </div>
         </div>
 
         <div id="newListForm{{id}}" class="collapse mb-3" style="max-width:320px">
@@ -45,9 +57,18 @@
 
                     <div class="kanban-col__header">
                         <span class="kanban-col__title">{{title}}</span>
-                        <button class="btn-icon btn-icon--delete"
-                                onclick="deleteList('{{id}}')"
-                                title="Eliminar lista">✕</button>
+                        <div class="d-flex gap-1">
+                            <button class="btn-icon"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editListModal"
+                                    data-id="{{id}}"
+                                    data-title="{{title}}"
+                                    data-description="{{description}}"
+                                    title="Editar lista">Edit</button>
+                            <form action="/deleteList/{{id}}" method="post" style="display:inline">
+                                <button type="submit" class="btn-icon btn-icon--delete" title="Eliminar">X</button>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="kanban-col__cards">

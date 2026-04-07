@@ -15,7 +15,21 @@ document.addEventListener('show.bs.modal', function(e) {
         document.getElementById('editCardDescription').value = btn.dataset.description;
         document.getElementById('editCardStartDate').value   = btn.dataset.start_date ? btn.dataset.start_date.split('T')[0] : '';
         document.getElementById('editCardDeadline').value    = btn.dataset.deadline   ? btn.dataset.deadline.split('T')[0]   : '';
-        document.getElementById('editCardResponsible').value    = btn.dataset.responsible_id;
+        document.getElementById('editCardResponsible').value = btn.dataset.responsible_id;
+    }
+
+    if (e.target.id === 'editBoardModal') {
+        const id = btn.dataset.id;
+        document.getElementById('editBoardForm').action      = `/updateBoard/${id}`;
+        document.getElementById('editBoardTitle').value      = btn.dataset.title;
+        document.getElementById('editBoardDescription').value = btn.dataset.description;
+    }
+
+    if (e.target.id === 'editListModal') {
+        const id = btn.dataset.id;
+        document.getElementById('editListForm').action       = `/updateList/${id}`;
+        document.getElementById('editListTitle').value       = btn.dataset.title;
+        document.getElementById('editListDescription').value = btn.dataset.description;
     }
 });
 

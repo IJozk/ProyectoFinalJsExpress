@@ -1,4 +1,3 @@
-require("dotenv").config();
 const URL_BASE_API = process.env.URL_BASE_API || "";
 
 module.exports = {
@@ -24,7 +23,7 @@ module.exports = {
             const response = await respuesta.json();
 
             if(response.error){
-                return res.redirect('/login')
+                return res.redirect('/login?messageError=Credenciales incorrectas')
             }else{
                 const token = response.token
 
@@ -40,7 +39,7 @@ module.exports = {
             }
         } catch (error) {
             console.error('Error en la petición:', error);
-            return res.status(500).json({error})
+            return res.status(500).redirect('/login?messageError=Credenciales incorrectas')
         }
     },
     register: async(req,res) => {
@@ -56,6 +55,16 @@ module.exports = {
                 userName: req.body.username
             }
 
+            if(req.body.password !== req.body.confirm_password){
+                return res.render('register', {
+                    messageError: 'Las contraseñas no coinciden',
+                    formData: {
+                        email: req.body.email,
+                        username: req.body.username
+                    }
+                })
+            }
+
             const respuesta = await fetch(url, {
                 method: 'POST', // Método de la petición
                 headers: {
@@ -68,14 +77,14 @@ module.exports = {
             console.log(response);
 
             if(response.error){
-                return res.redirect('/register')
+                return res.redirect('/register?messageError=Error en registro')
             }else{
                 return res.redirect('/login')
             }
 
         } catch (error) {
             console.error('Error en la petición:', error);
-            return res.redirect('/register')
+            return res.redirect('/register?messageError=Error en registro')
         }
     },
 }

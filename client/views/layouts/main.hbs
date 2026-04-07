@@ -63,6 +63,50 @@
         </div>
     </div>
 
+    <!-- Modal editar tablero -->
+    <div class="modal fade" id="editBoardModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content mk-modal">
+                <div class="mk-modal__header">
+                    <span>Editar tablero</span>
+                    <button type="button" class="mk-modal__close" data-bs-dismiss="modal">&#x2715;</button>
+                </div>
+                <form id="editBoardForm" action="/updateBoard" method="post">
+                    <div class="mk-modal__body">
+                        <input type="text" class="mk-input" name="title" id="editBoardTitle" placeholder="Nombre" required>
+                        <textarea class="mk-input" name="description" id="editBoardDescription" placeholder="Descripción" rows="2"></textarea>
+                    </div>
+                    <div class="mk-modal__footer">
+                        <button type="button" class="mk-btn mk-btn--ghost" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="mk-btn mk-btn--primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar lista -->
+    <div class="modal fade" id="editListModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content mk-modal">
+                <div class="mk-modal__header">
+                    <span>Editar lista</span>
+                    <button type="button" class="mk-modal__close" data-bs-dismiss="modal">&#x2715;</button>
+                </div>
+                <form id="editListForm" action="/updateList" method="post">
+                    <div class="mk-modal__body">
+                        <input type="text" class="mk-input" name="title" id="editListTitle" placeholder="Nombre" required>
+                        <textarea class="mk-input" name="description" id="editListDescription" placeholder="Descripción" rows="2"></textarea>
+                    </div>
+                    <div class="mk-modal__footer">
+                        <button type="button" class="mk-btn mk-btn--ghost" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="mk-btn mk-btn--primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/dashboard.js"></script>
 </body>
