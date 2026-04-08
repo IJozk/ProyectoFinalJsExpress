@@ -11,7 +11,11 @@ const sequelize = new Sequelize( database, user, password, {
     host: host,
     dialect: 'postgres',
     logging: false,
-    port: port
+    port: port,
+    ssl: {
+        require: true,
+        rejectUnauthorized: false
+    }
 });
 
 // export the instance inside an object so destructuring works
