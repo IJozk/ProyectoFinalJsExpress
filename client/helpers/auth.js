@@ -13,12 +13,16 @@ module.exports = {
             }
 
             const respuesta = await fetch(url, {
-                method: 'POST', // Método de la petición
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json' // Indicamos que enviamos JSON
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(datos) // El objeto convertido a string
+                body: JSON.stringify(datos)
             });
+
+            if (!respuesta.ok) {
+                return res.redirect('/login?messageError=Credenciales incorrectas')
+            }
 
             const response = await respuesta.json();
 
@@ -66,12 +70,16 @@ module.exports = {
             }
 
             const respuesta = await fetch(url, {
-                method: 'POST', // Método de la petición
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json' // Indicamos que enviamos JSON
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(datos) // El objeto convertido a string
+                body: JSON.stringify(datos)
             });
+
+            if (!respuesta.ok) {
+                return res.redirect('/register?messageError=Error en registro')
+            }
 
             const response = await respuesta.json();
             console.log(response);
