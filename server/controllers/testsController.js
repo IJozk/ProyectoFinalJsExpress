@@ -1,4 +1,4 @@
-import sequelize  from "../config/db.js";
+import { sequelize } from "../config/db.js";
 
 const connectionTest = async(req, res) =>{
     try {

@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
-import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '../generated/prisma/client.ts';
 
 const   user = process.env.DB_USER;
 const   host= process.env.DB_HOST;
@@ -30,8 +31,8 @@ const sequelize = new Sequelize(db_url, {
     }
 });
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({ connectionString: process.env.DB_URL_CONNECT });
+const prisma = new PrismaClient({ adapter });
 
 
-// export the instance inside an object so destructuring works
-export default {sequelize, prisma};
+export { sequelize, prisma };
