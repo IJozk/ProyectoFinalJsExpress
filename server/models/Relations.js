@@ -1,7 +1,7 @@
-const User = require("./User.js")
-const Board = require("./Board.js")
-const List = require("./List.js")
-const Card = require("./Card.js")
+import User from "./User.js";
+import Board from "./Board.js";
+import List from "./List.js";
+import Card from "./Card.js";
 
 // Relación uno a muchos entre el usuario y sus tableros
 User.hasMany(Board, { onDelete: 'CASCADE' })
@@ -16,7 +16,7 @@ List.hasMany(Card, { onDelete: 'CASCADE' })
 Card.belongsTo(List)
 
 // Se exportan los modelos con sus relaciones
-module.exports = {
+export {
     User,
     Board,
     List,

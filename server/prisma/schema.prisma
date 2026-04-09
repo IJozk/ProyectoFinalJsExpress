@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Boards {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String?
+  order       Int?
+  createdAt   DateTime @db.Timestamptz(6)
+  updatedAt   DateTime @db.Timestamptz(6)
+  UserId      String?  @db.Uuid
+  Users       Users?   @relation(fields: [UserId], references: [id], onDelete: Cascade)
+  Lists       Lists[]
+}
+
+model Cards {
+  id             Int       @id @default(autoincrement())
+  title          String    @db.VarChar(255)
+  description    String?
+  start_date     DateTime? @db.Timestamptz(6)
+  deadline       DateTime? @db.Timestamptz(6)
+  responsible_id String?   @db.Uuid
+  order          Int?
+  createdAt      DateTime  @db.Timestamptz(6)
+  updatedAt      DateTime  @db.Timestamptz(6)
+  ListId         Int?
+  Lists          Lists?    @relation(fields: [ListId], references: [id], onDelete: Cascade)
+}
+
+model Lists {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String?
+  order       Int?
+  createdAt   DateTime @db.Timestamptz(6)
+  updatedAt   DateTime @db.Timestamptz(6)
+  BoardId     Int?
+  Cards       Cards[]
+  Boards      Boards?  @relation(fields: [BoardId], references: [id], onDelete: Cascade)
+}
+
+model Tasks {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String
+  completed   String   @default(dbgenerated("false"))
+  createdAt   DateTime @db.Timestamptz(6)
+  updatedAt   DateTime @db.Timestamptz(6)
+}
+
+model Users {
+  id        String   @id @db.Uuid
+  email     String   @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  userName  String   @db.VarChar(255)
+  createdAt DateTime @db.Timestamptz(6)
+  updatedAt DateTime @db.Timestamptz(6)
+  Boards    Boards[]
+}

@@ -1,4 +1,4 @@
-const { Card, List } = require("../models/Relations")
+import { Card, List } from "../models/Relations.js";
 
 const createCard = async(req, res) =>{
 
@@ -77,7 +77,7 @@ const updateCard = async(req, res) =>{
     }
 }
 
-module.exports = {
+export {
     createCard,
     deleteCard,
     updateCard

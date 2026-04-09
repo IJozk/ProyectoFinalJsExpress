@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const authRoutes = require("./auth");
-const cardRoutes = require("./card");
-const userRoutes = require("./user");
-const boardRoutes = require("./board");
-const listRoutes = require("./list");
-const testRoutes = require("./tests");
+import authRoutes from "./auth.js"
+import cardRoutes from "./card.js"
+import userRoutes from "./user.js"
+import boardRoutes from "./board.js"
+import listRoutes from "./list.js"
+import testRoutes from "./tests.js"
 
 router.use("/auth", authRoutes);
 router.use("/card", cardRoutes);
@@ -15,4 +15,4 @@ router.use("/board", boardRoutes);
 router.use("/list", listRoutes);
 router.use("/tests", testRoutes);
 
-module.exports = router;
+export default router;

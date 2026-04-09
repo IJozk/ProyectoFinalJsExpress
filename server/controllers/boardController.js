@@ -1,4 +1,4 @@
-const { Board } = require("../models/Relations")
+import { Board } from "../models/Relations.js";
 
 const createBoard = async(req, res) =>{
     try {
@@ -48,7 +48,7 @@ const updateBoard = async(req, res) =>{
     }
 }
 
-module.exports = {
+export {
     createBoard,
     deleteBoard,
     updateBoard

@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const { createList, updateList, deleteList } = require("../controllers/listController")
-const authMiddle = require("../middleware/auth")
+import express from 'express';
+import { createList, updateList, deleteList } from '../controllers/listController.js';
+import authMiddle from '../middleware/auth.js';
 
+const router = express.Router();
 
 // Creación List
 router.post("/createList", authMiddle, async(req, res) => createList(req, res))
@@ -11,4 +11,4 @@ router.patch("/updateList/:id", authMiddle, async(req, res) => updateList(req, r
 // Delete List
 router.delete("/deleteList/:id", authMiddle, async(req, res) => deleteList(req, res))
 
-module.exports = router;
+export default router;

@@ -1,5 +1,4 @@
-const { User, Board, List, Card } = require("../models/Relations")
-
+import { User, Board, List, Card } from "../models/Relations.js";
 
 // Create user
 const getUserData =async (req, res) => {
@@ -30,6 +29,4 @@ const getUserData =async (req, res) => {
     }
 }
 
-module.exports = {
-    getUserData
-}
+export default {getUserData};

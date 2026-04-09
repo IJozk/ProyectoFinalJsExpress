@@ -1,7 +1,7 @@
-const { User } = require("../models/Relations")
-const jwt = require("jsonwebtoken")
-const bcrypt = require("bcryptjs")
-const crypto = require('crypto');
+import { User } from "../models/Relations.js"
+import jwt from "jsonwebtoken"
+import bcrypt from "bcryptjs"
+import crypto from 'crypto'
 
 // REGISTER
 const register = async(req, res) =>{
@@ -68,7 +68,4 @@ const login = async(req, res) =>{
     }
 }
 
-module.exports ={
-    login,
-    register
-}
+export { login, register }

@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const { createCard, deleteCard, updateCard } = require("../controllers/cardController")
-const authMiddle = require("../middleware/auth")
+import express from 'express';
+import { createCard, deleteCard, updateCard } from '../controllers/cardController.js';
+import authMiddle from '../middleware/auth.js';
 
+const router = express.Router();
 
 // Creación Card
 router.post("/createCard", authMiddle, async(req, res) => createCard(req, res))
@@ -11,4 +11,4 @@ router.delete("/deleteCard/:id",  authMiddle, async(req, res) => deleteCard(req,
 // Update card
 router.patch("/updateCard/:id",authMiddle, async(req, res) => updateCard(req, res))
 
-module.exports = router;
+export default router;

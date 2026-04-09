@@ -1,5 +1,4 @@
-require("dotenv").config();
-const { expressjwt: jwtMiddleware } = require('express-jwt');
+import { expressjwt as jwtMiddleware } from 'express-jwt';
 
 // Este middleware verificará el token en la cabecera 'Authorization: Bearer <token>'
 const authMiddle = jwtMiddleware({
@@ -7,4 +6,4 @@ const authMiddle = jwtMiddleware({
     algorithms: ['HS256']
 });
 
-module.exports = authMiddle;
+export default authMiddle;

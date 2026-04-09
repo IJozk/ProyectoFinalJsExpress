@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const { getUserData } = require("../controllers/userController");
-const authMiddle =require("../middleware/auth");
+import express from 'express';
+import  getUserData from '../controllers/userController.js';
+import authMiddle from '../middleware/auth.js';
 
+const router = express.Router();
 
 // Obtener datos de usuario, con tableros
 router.post("/getUserData", authMiddle, async(req, res) => getUserData(req, res))
 
-module.exports = router;
+export default router;

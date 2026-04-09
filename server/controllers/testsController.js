@@ -1,4 +1,4 @@
-const sequelize = require("../config/db")
+import sequelize  from "../config/db.js";
 
 const connectionTest = async(req, res) =>{
     try {
@@ -12,6 +12,11 @@ const connectionTest = async(req, res) =>{
     }   
 }
 
-module.exports = {
-    connectionTest
+const sync = async() => {
+    await sequelize.sync({ force: true });
+};
+
+export {
+    connectionTest,
+    sync
 }

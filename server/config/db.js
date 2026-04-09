@@ -1,5 +1,5 @@
-require('dotenv').config();
-const { Sequelize } = require('sequelize');
+import Sequelize from 'sequelize';
+import { PrismaClient } from '@prisma/client';
 
 const   user = process.env.DB_USER;
 const   host= process.env.DB_HOST;
@@ -30,6 +30,8 @@ const sequelize = new Sequelize(db_url, {
     }
 });
 
+const prisma = new PrismaClient();
+
 
 // export the instance inside an object so destructuring works
-module.exports = sequelize;
+export default {sequelize, prisma};
