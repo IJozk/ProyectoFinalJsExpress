@@ -29,4 +29,4 @@ const getUserData =async (req, res) => {
     }
 }
 
-export default {getUserData};
+export default { getUserData };
