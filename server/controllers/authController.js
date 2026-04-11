@@ -36,10 +36,11 @@ const register = async(req, res) =>{
             password: hashedPassword 
         })
 
-        res.status(201).json({ status: "success", message: "Se resgistro al usuario correctamente" })        
+        return res.status(201).json({ status: "success", message: "Se resgistro al usuario correctamente" })        
 
     } catch (error) {
-                res.status(500).send('Error en el servidor');
+        console.log(error)
+        return res.status(500).send({ message: "Error en el servidor"});
     }
 }
 
@@ -64,7 +65,8 @@ const login = async(req, res) =>{
 
         return res.status(200).json({ status: "success", message: "Se logeo al usuario correctamente", token: token })
     } catch (error) {
-        res.status(500).json({ error: "Error en el servidor"});
+        console.log(error)
+        return res.status(500).send({ message: "Error en el servidor"});
     }
 }
 
